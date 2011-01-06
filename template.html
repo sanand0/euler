@@ -1,0 +1,27 @@
+<!doctype html><html><head>
+<link rel="alternate" href="http://feeds.feedburner.com/sanand" type="application/rss+xml" title="Anand's articles">
+<link rel="icon" href="/favicon.ico">
+<title>Project Euler: Python solutions</title>
+<link rel="stylesheet" href="/blog/wp-content/themes/mezzosub/style.css">
+<style>
+pre { overflow: scroll; width: 600px; display:none; }
+.slow { color: red; }
+table { margin-top: 20px; }
+</style>
+<script src="http://kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+</head><body>
+<div class="container_12">
+    <div class="grid_12">
+        <h1>Project Euler: Python solutions</h1>
+        <div>I'm trying the solve <a href="http://projecteuler.net/">Project Euler</a> with Python. My target is < 10 seconds per problem. Some common functions are in these modules: %(module)s</div>
+        <table class="lines sortable">
+            <thead><tr><th class="numbers">Problem</th><th class="numbers">Answer</th><th class="numbers" title="Time taken in milliseconds to run this program on my machine. My target is 10 seconds max.">Time (ms)</th><th>Solution</th></tr></thead>
+            <tbody>%(table)s</tbody>
+        </table>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script>
+$('.show').click(function(e) { $(this).next().toggle(); e.preventDefault(); });
+</script>
+</body></html>
