@@ -1,12 +1,11 @@
 import os, os.path, stat, time, glob, operator, logging
-from django.utils import simplejson as json
+import json
 
 logging.basicConfig(level=logging.INFO)
 
 PATH        = os.path.dirname(__file__)
 STATS_FILE  = os.path.join(PATH, 'stats.txt')
 TEMPLATE    = os.path.join(PATH, 'template.html')
-HTML_FILE   = 'D:/html/a/euler.html'
 stats       = json.loads(open(STATS_FILE).read())
 stats_mtime = os.stat(STATS_FILE)[stat.ST_MTIME]
 
