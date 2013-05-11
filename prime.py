@@ -1,3 +1,5 @@
+import numpy
+
 prime_list = [2, 3, 5, 7, 11, 13, 17, 19, 23]   # Ensure that this is initialised with at least 1 prime
 prime_dict = dict.fromkeys(prime_list, 1)
 lastn      = prime_list[-1]
@@ -21,6 +23,21 @@ def _refresh(x):
         if _isprime(lastn):
             prime_list.append(lastn)            # Maintain a list for sequential access
 
+# http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
+# primesfrom2to()
+def _refresh(n):
+    """ Input n>=6, Returns a array of primes, 2 <= p <= n """
+    global prime_list
+    n = n + 1
+    sieve = numpy.ones(n/3 + (n%6==2), dtype=numpy.bool)
+    for i in xrange(1,int(n**0.5)/3+1):
+        if sieve[i]:
+            k=3*i+1|1
+            sieve[       k*k/3     ::2*k] = False
+            sieve[k*(k-2*(i&1)+4)/3::2*k] = False
+    prime_list = numpy.r_[2,3,((3*numpy.nonzero(sieve)[0][1:]+1)|1)]
+    return prime_list
+
 def prime(x):
     ''' Returns the xth prime '''
     global lastn
@@ -32,7 +49,8 @@ def prime(x):
 
 def isprime(x):
     ''' Returns 1 if x is prime, 0 if not. Uses a pre-computed dictionary '''
-    _refresh(x)                                 # Compute primes up to x (which is a bit wasteful)
+    if x > prime_list[-1]:
+        _refresh(x)                             # Compute primes up to x (which is a bit wasteful)
     return prime_dict.get(x, 0)                 # Check if x is in the list
 
 def factors(n):
